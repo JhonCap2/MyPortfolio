@@ -1,0 +1,92 @@
+/* ===== Layout General ===== */
+.login-wrapper {
+  display: flex;
+  width: 100vw;        /* 🔹 Asegura que ocupe todo el ancho de la pantalla */
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-color: #0b0b0d;
+  overflow: hidden;     /* 🔹 Evita scroll innecesario */
+}
+
+/* ===== Imagen lateral ===== */
+.login-image {
+  flex: 1.3;
+  background: url("/src/assets/login-bg.jpg") no-repeat center center/cover;
+  filter: brightness(0.9);
+}
+
+/* ===== Sección del formulario ===== */
+.login-form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;    /* 🔹 Centra horizontalmente */
+  align-items: center;        /* 🔹 Centra verticalmente */
+  background: linear-gradient(to bottom right, #0d0d10, #141418);
+  padding: 2rem;              /* 🔹 Espacio interno */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Caja del formulario ===== */
+.form-box {
+  width: 100%;
+  max-width: 380px;
+  background-color: rgba(25, 25, 28, 0.85);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.25);
+  margin: 0 auto;             /* 🔹 Centra dentro del contenedor */
+}
+
+/* ===== Títulos ===== */
+.form-box h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: left;           /* 🔹 Alineado visualmente al diseño */
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* ===== Inputs ===== */
+.form-box label {
+  display: block;
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  text-align: left;
+}
+
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.3rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1b1b1f;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+/* ===== Botón principal ===== */
+.login-button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 0.5rem;
+}
