@@ -3,6 +3,8 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const JWT_SECRET = process.env.JWT_SECRET || "clave_super_secreta";
+
 const router = express.Router();
 
 // REGISTRO
@@ -41,7 +43,7 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
 

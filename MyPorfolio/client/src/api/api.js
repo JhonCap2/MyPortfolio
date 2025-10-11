@@ -113,16 +113,24 @@ export const addUser = async (user) => {
 };
 
 export const updateUser = async (id, user) => {
+  const token = localStorage.getItem("token");
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+
   const res = await fetch(`${API_URL}/users/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify(user),
   });
   return res.json();
 };
 
 export const deleteUser = async (id) => {
-  const res = await fetch(`${API_URL}/users/${id}`, { method: "DELETE" });
+  const token = localStorage.getItem("token");
+  const headers = {};
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+
+  const res = await fetch(`${API_URL}/users/${id}`, { method: "DELETE", headers });
   return res.json();
 };
 

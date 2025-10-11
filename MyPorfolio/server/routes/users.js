@@ -2,6 +2,8 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import { authenticate } from "../middlewares/auth.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -39,7 +41,8 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
+    const JWT_SECRET = process.env.JWT_SECRET || "clave_super_secreta";
+    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -58,5 +61,27 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Eliminar usuario por id
+router.delete("/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "ID de usuario inválido" });
+    }
+
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json({ message: "Usuario eliminado correctamente", user: deletedUser });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 export default router;
