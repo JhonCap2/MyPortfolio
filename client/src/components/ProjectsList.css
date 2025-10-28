@@ -1,0 +1,105 @@
+.dashboard-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.type-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button.add {
+  background-color: #4caf50;
+  color: white;
+}
+
+.button.edit {
+  background-color: #2196f3;
+  color: white;
+}
+
+.button.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.button.active {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.message {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card input,
+.card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.card textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.projects-table th,
+.projects-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.projects-table th {
+  border-bottom: 2px solid #ccc;
+}
+
+.projects-table tr:hover {
+  background-color: #080000;
+}
+
+.projects-table td button {
+  margin-right: 5px;
+}
