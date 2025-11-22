@@ -1,9 +1,0 @@
-.page-content {
-  opacity: 1;
-}
-
-.page-content.hidden {
-  opacity: 0;
-  transform: translateY(-20px); /* mueve el contenido hacia arriba mientras desaparece */
-  pointer-events: none; /* evita interacción mientras está oculto */
-}

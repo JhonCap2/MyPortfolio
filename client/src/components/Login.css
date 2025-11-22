@@ -76,6 +76,33 @@
   transition: 0.3s;
 }
 
+/* ===== Contenedor para el campo de contraseña y el botón de mostrar/ocultar ===== */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.3rem; /* Mantenemos el margen que tenía el input */
+}
+
+.password-wrapper input {
+  margin-bottom: 0; /* Quitamos el margen del input porque ahora está en el wrapper */
+  padding-right: 3rem; /* Hacemos espacio para el ícono */
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  user-select: none; /* Evita que el texto se seleccione al hacer doble clic */
+  background: transparent; /* Hacemos el botón invisible */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== Botón principal ===== */
 .login-button {
   width: 100%;
