@@ -25,7 +25,7 @@ export const addContact = async (contact) => {
     body: JSON.stringify(contact),
   });
   if (res.status === 204) {
-    return null; // O un objeto vacío {} si lo prefieres
+    return {};
   }
   return res.json();
 };
@@ -37,7 +37,7 @@ export const updateContact = async (id, contact) => {
     body: JSON.stringify(contact),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -48,7 +48,7 @@ export const deleteContact = async (id) => {
     headers: getHeaders(),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -68,7 +68,7 @@ export const addProject = async (project) => {
     body: JSON.stringify(project),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -80,7 +80,7 @@ export const updateProject = async (id, project) => {
     body: JSON.stringify(project),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -91,7 +91,7 @@ export const deleteProject = async (id) => {
     headers: getHeaders(),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -111,7 +111,7 @@ export const addEducation = async (education) => {
     body: JSON.stringify(education),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -123,7 +123,7 @@ export const updateEducation = async (id, education) => {
     body: JSON.stringify(education),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -134,7 +134,7 @@ export const deleteEducation = async (id) => {
     headers: getHeaders(),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -154,7 +154,7 @@ export const addUser = async (user) => {
     body: JSON.stringify(user),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -166,7 +166,7 @@ export const updateUser = async (id, user) => {
     body: JSON.stringify(user),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
@@ -177,7 +177,7 @@ export const deleteUser = async (id) => {
     headers: getHeaders(),
   });
   if (res.status === 204) {
-    return null;
+    return {};
   }
   return res.json();
 };
