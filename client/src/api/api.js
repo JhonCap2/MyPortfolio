@@ -1,12 +1,5 @@
 
 
-const API_URL = import.meta.env.VITE_API_URL || "/api";
-
-// NOTE: By using a relative path like "/api", we are leveraging
-// the "proxy" configuration in the frontend's package.json.
-// This redirects API calls to the backend server during development,
-// eliminating the need for environment variables for the base URL.
-
 // -------------------
 // Helper for headers with token
 // -------------------
@@ -21,12 +14,12 @@ const getHeaders = () => {
 // CONTACTS
 // -------------------
 export const getContacts = async () => {
-  const res = await fetch(`${API_URL}/contacts`, { headers: getHeaders() });
+  const res = await fetch("/api/contacts", { headers: getHeaders() });
   return res.json();
 };
 
 export const addContact = async (contact) => {
-  const res = await fetch(`${API_URL}/contacts`, {
+  const res = await fetch("/api/contacts", {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(contact),
@@ -35,7 +28,7 @@ export const addContact = async (contact) => {
 };
 
 export const updateContact = async (id, contact) => {
-  const res = await fetch(`${API_URL}/contacts/${id}`, {
+  const res = await fetch(`/api/contacts/${id}`, {
     method: "PUT",
     headers: getHeaders(),
     body: JSON.stringify(contact),
@@ -44,7 +37,7 @@ export const updateContact = async (id, contact) => {
 };
 
 export const deleteContact = async (id) => {
-  const res = await fetch(`${API_URL}/contacts/${id}`, {
+  const res = await fetch(`/api/contacts/${id}`, {
     method: "DELETE",
     headers: getHeaders(),
   });
@@ -55,12 +48,12 @@ export const deleteContact = async (id) => {
 // PROJECTS
 // -------------------
 export const getProjects = async () => {
-  const res = await fetch(`${API_URL}/projects`, { headers: getHeaders() });
+  const res = await fetch("/api/projects", { headers: getHeaders() });
   return res.json();
 };
 
 export const addProject = async (project) => {
-  const res = await fetch(`${API_URL}/projects`, {
+  const res = await fetch("/api/projects", {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(project),
@@ -69,7 +62,7 @@ export const addProject = async (project) => {
 };
 
 export const updateProject = async (id, project) => {
-  const res = await fetch(`${API_URL}/projects/${id}`, {
+  const res = await fetch(`/api/projects/${id}`, {
     method: "PUT",
     headers: getHeaders(),
     body: JSON.stringify(project),
@@ -78,7 +71,7 @@ export const updateProject = async (id, project) => {
 };
 
 export const deleteProject = async (id) => {
-  const res = await fetch(`${API_URL}/projects/${id}`, {
+  const res = await fetch(`/api/projects/${id}`, {
     method: "DELETE",
     headers: getHeaders(),
   });
@@ -89,12 +82,12 @@ export const deleteProject = async (id) => {
 // EDUCATIONS
 // -------------------
 export const getEducations = async () => {
-  const res = await fetch(`${API_URL}/educations`, { headers: getHeaders() });
+  const res = await fetch("/api/educations", { headers: getHeaders() });
   return res.json();
 };
 
 export const addEducation = async (education) => {
-  const res = await fetch(`${API_URL}/educations`, {
+  const res = await fetch("/api/educations", {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(education),
@@ -103,7 +96,7 @@ export const addEducation = async (education) => {
 };
 
 export const updateEducation = async (id, education) => {
-  const res = await fetch(`${API_URL}/educations/${id}`, {
+  const res = await fetch(`/api/educations/${id}`, {
     method: "PUT",
     headers: getHeaders(),
     body: JSON.stringify(education),
@@ -112,7 +105,7 @@ export const updateEducation = async (id, education) => {
 };
 
 export const deleteEducation = async (id) => {
-  const res = await fetch(`${API_URL}/educations/${id}`, {
+  const res = await fetch(`/api/educations/${id}`, {
     method: "DELETE",
     headers: getHeaders(),
   });
@@ -123,12 +116,12 @@ export const deleteEducation = async (id) => {
 // USERS
 // -------------------
 export const getUsers = async () => {
-  const res = await fetch(`${API_URL}/users`, { headers: getHeaders() });
+  const res = await fetch("/api/users", { headers: getHeaders() });
   return res.json();
 };
 
 export const addUser = async (user) => {
-  const res = await fetch(`${API_URL}/users`, {
+  const res = await fetch("/api/users", {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(user),
@@ -137,7 +130,7 @@ export const addUser = async (user) => {
 };
 
 export const updateUser = async (id, user) => {
-  const res = await fetch(`${API_URL}/users/${id}`, {
+  const res = await fetch(`/api/users/${id}`, {
     method: "PUT",
     headers: getHeaders(),
     body: JSON.stringify(user),
@@ -146,7 +139,7 @@ export const updateUser = async (id, user) => {
 };
 
 export const deleteUser = async (id) => {
-  const res = await fetch(`${API_URL}/users/${id}`, {
+  const res = await fetch(`/api/users/${id}`, {
     method: "DELETE",
     headers: getHeaders(),
   });
@@ -157,7 +150,7 @@ export const deleteUser = async (id) => {
 // AUTHENTICATION
 // -------------------
 export const registerUser = async (userData) => {
-  const res = await fetch(`${API_URL}/auth/register`, {
+  const res = await fetch("/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
@@ -175,7 +168,7 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = async (credentials) => {
-  const res = await fetch(`${API_URL}/auth/signin`, {
+  const res = await fetch("/api/auth/signin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
@@ -193,7 +186,7 @@ export const loginUser = async (credentials) => {
 };
 
 export const getProfile = async () => {
-  const res = await fetch(`${API_URL}/auth/profile`, {
+  const res = await fetch("/api/auth/profile", {
     headers: getHeaders(),
   });
   if (!res.ok) {
