@@ -7,7 +7,7 @@ export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export default function Login({ onLogin }) {
       // Guardamos el token y actualizamos el estado principal de la app
       localStorage.setItem("token", data.token);
       onLogin(data.user); // Pasamos el usuario (con su rol) al componente App
-      navigate("/dashboard"); // Correcto: Redirigimos al dashboard
+      navigate("/dashboard"); // Redirigimos al dashboard
     } catch (err) {
       setMessage(err.message || "Error de conexión al servidor");
       console.error(err);

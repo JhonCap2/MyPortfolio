@@ -198,7 +198,9 @@ const ProjectsList = ({ user, onSignOut }) => {
           <p>Welcome, <strong>{user.name}</strong>! Your role is: <strong>{user.role}</strong></p>
         </div>
         <div className="header-actions">
-          <button onClick={onSignOut} className="button delete">Sign Out</button>
+          {onSignOut && (
+            <button onClick={onSignOut} className="button delete">Sign Out</button>
+          )}
         </div>
       </div>
 
