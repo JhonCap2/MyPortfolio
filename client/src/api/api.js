@@ -200,7 +200,11 @@ export const registerUser = async (userData) => {
       throw new Error(res.statusText || "Registration failed");
     }
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return null; // O un objeto vacío {} si no se espera contenido
 };
 
 export const loginUser = async (credentials) => {
@@ -218,7 +222,11 @@ export const loginUser = async (credentials) => {
       throw new Error(res.statusText || "Login failed");
     }
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return null; // O un objeto vacío {} si no se espera contenido
 };
 
 export const getProfile = async () => {
