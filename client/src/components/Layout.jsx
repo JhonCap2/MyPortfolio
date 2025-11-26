@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Importamos Link para la navegación
 import {
   FaHome, FaUser, FaProjectDiagram, FaTools,
   FaBook, FaPhone, FaGithub, FaLinkedin
@@ -15,7 +16,7 @@ import About from "../Pages/About";
 
 import "./Layout.css";
 
-export default function Layout() {
+export default function Layout({ user, onSignOut }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
 
@@ -54,24 +55,35 @@ export default function Layout() {
       
       {/* Navbar */}
       <div className="navbar-container">
-        <div className="nav-center">
+        {/* Contenedor principal para logo y enlaces */}
+        <div className={`nav-main ${menuOpen ? "open" : ""}`}>
           <img src={Logo} alt="Logo JH" className="logo" />
-        </div>
-        <div className={`nav-left ${menuOpen ? "open" : ""}`}>
-          <div className="nav-buttons">
-            <button className="nav-button" onClick={() => scrollToSection("home")}><FaHome /> Home</button>
-            <button className="nav-button" onClick={() => scrollToSection("projects")}><FaProjectDiagram /> Projects</button>
-            <button className="nav-button" onClick={() => scrollToSection("services")}><FaTools /> Services</button>
-            <button className="nav-button" onClick={() => scrollToSection("education")}><FaBook /> Education</button>
-            <button className="nav-button" onClick={() => scrollToSection("about")}><FaUser /> About</button>
-            <button className="nav-button" onClick={() => scrollToSection("contact")}><FaPhone /> Contact</button>
-          </div>
-          <div className="nav-socials">
-            <a href="https://github.com/JhonCap2" target="_blank" rel="noopener noreferrer"><FaGithub size={20} /></a>
-            <a href="https://www.linkedin.com/in/jhon-christopher-adames-pérez-b6b078248" target="_blank" rel="noopener noreferrer"><FaLinkedin size={20} /></a>
+          <div className="nav-left">
+            <div className="nav-buttons">
+              <button className="nav-button" onClick={() => scrollToSection("home")}><FaHome /> Home</button>
+              <button className="nav-button" onClick={() => scrollToSection("projects")}><FaProjectDiagram /> Projects</button>
+              <button className="nav-button" onClick={() => scrollToSection("services")}><FaTools /> Services</button>
+              <button className="nav-button" onClick={() => scrollToSection("education")}><FaBook /> Education</button>
+              <button className="nav-button" onClick={() => scrollToSection("about")}><FaUser /> About</button>
+              <button className="nav-button" onClick={() => scrollToSection("contact")}><FaPhone /> Contact</button>
+              {user ? (
+                <button onClick={onSignOut} className="nav-button login-button">
+                  Cerrar Sesión
+                </button>
+              ) : (
+                <Link to="/login" className="nav-button login-button">
+                  Login
+                </Link>
+              )}
+            </div>
+            <div className="nav-socials">
+              <a href="https://github.com/JhonCap2" target="_blank" rel="noopener noreferrer"><FaGithub size={20} /></a>
+              <a href="https://www.linkedin.com/in/jhon-christopher-adames-pérez-b6b078248" target="_blank" rel="noopener noreferrer"><FaLinkedin size={20} /></a>
+            </div>
           </div>
         </div>
 
+        {/* Contenedor para login y menú hamburguesa */}
         <div className="nav-right">
           <div className="menu-toggle" onClick={handleToggle}>&#9776;</div>
         </div>

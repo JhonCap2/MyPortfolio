@@ -1,11 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import Project from "../models/project.js";
+import { authenticate, isAdmin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-// GET todos los proyectos
-router.get("/", async (req, res) => {
+// GET todos los proyectos (todos los usuarios autenticados)
+router.get("/", authenticate, async (req, res) => {
   try {
     const projects = await Project.find();
     res.json(projects);
@@ -14,18 +15,18 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST crear proyecto
-router.post("/", async (req, res) => {
+// POST crear proyecto (solo admin)
+router.post("/", authenticate, isAdmin, async (req, res) => {
   try {
-    const newProject = await Project.create(req.body);
+    const newProject = await Project.create({ ...req.body, createdBy: req.user.id });
     res.status(201).json(newProject);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// PUT actualizar proyecto
-router.put("/:id", async (req, res) => {
+// PUT actualizar proyecto (solo admin)
+router.put("/:id", authenticate, isAdmin, async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -34,10 +35,7 @@ router.put("/:id", async (req, res) => {
 
   try {
     const updated = await Project.findByIdAndUpdate(id, req.body, { new: true });
-
-    if (!updated) {
-      return res.status(404).json({ message: "Proyecto no encontrado" });
-    }
+    if (!updated) return res.status(404).json({ message: "Proyecto no encontrado" });
 
     res.json(updated);
   } catch (err) {
@@ -45,8 +43,8 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE eliminar proyecto
-router.delete("/:id", async (req, res) => {
+// DELETE eliminar proyecto (solo admin)
+router.delete("/:id", authenticate, isAdmin, async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -55,10 +53,7 @@ router.delete("/:id", async (req, res) => {
 
   try {
     const deleted = await Project.findByIdAndDelete(id);
-
-    if (!deleted) {
-      return res.status(404).json({ message: "Proyecto no encontrado" });
-    }
+    if (!deleted) return res.status(404).json({ message: "Proyecto no encontrado" });
 
     res.json({ message: "Proyecto eliminado correctamente", deleted });
   } catch (err) {

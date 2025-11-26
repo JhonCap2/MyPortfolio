@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
+import User from "../models/user.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "clave_super_secreta";
 
-export const authenticate = (req, res, next) => {
+// Autenticación general
+export const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ message: "No token provided" });
 
@@ -14,9 +16,23 @@ export const authenticate = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
-    return next();
+    // Find the user by ID from the token and attach it to the request
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    req.user = user; // Now req.user contains the full user object (including role)
+    next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }
+};
+
+// Verificar si es admin
+export const isAdmin = (req, res, next) => {
+  // This will now work correctly because req.user is the full user object
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Acceso denegado: solo admin" });
+  }
+  next();
 };

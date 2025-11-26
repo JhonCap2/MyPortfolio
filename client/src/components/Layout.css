@@ -24,15 +24,17 @@
   z-index: 1000;
 }
 
-/* Logo alineado a la derecha */
-.nav-center {
+/* Contenedor para logo y enlaces de navegación */
+.nav-main {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 20px; /* Espacio entre logo y enlaces */
 }
 
 .logo {
   height: 70px;
+  /* Aseguramos que el logo no se encoja */
+  flex-shrink: 0;
 }
 
 /* Botón hamburguesa */
@@ -43,7 +45,7 @@
   display: none;
 }
 
-/* Bloques */
+/* Contenedores de enlaces y login */
 .nav-left, .nav-right {
   display: flex;
   align-items: center;
@@ -67,6 +69,22 @@
   gap: 5px;
 }
 
+/* Estilo específico para el botón de Login para que resalte */
+.nav-button.login-button {
+  background-color: #007BFF; /* Azul primario */
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none; /* Asegura que no haya subrayado del Link */
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-button.login-button:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  transform: scale(1.05);
+  color: white; /* Mantiene el texto blanco */
+}
+
 /* Redes sociales */
 .nav-socials {
   display: flex;
@@ -78,11 +96,13 @@
   .menu-toggle {
     display: block;
   }
-
-  .nav-left {
+  
+  /* El contenedor de enlaces ahora es el menú desplegable */
+  .nav-main {
     position: absolute;
     top: 70px;
     left: 0;
+    right: 0; /* Ocupa todo el ancho */
     background-color: rgba(0, 0, 0, 0.95);
     flex-direction: column;
     width: 100%;
@@ -91,18 +111,18 @@
     transition: max-height 0.3s ease-in-out;
     z-index: 999;
   }
-
-  .nav-left.open {
+  
+  .nav-main.open {
     max-height: 500px;
   }
 
-  .nav-left .nav-buttons {
+  .nav-main .nav-buttons {
     flex-direction: column;
     gap: 10px;
     padding: 10px;
   }
-
-  .nav-left .nav-socials {
+  
+  .nav-main .nav-socials {
     justify-content: flex-start;
     margin-left: 10px;
     padding-bottom: 10px;
@@ -113,17 +133,20 @@
     align-items: center;
   }
 
-  .nav-buttons,
-  .nav-socials {
-    color: white;
-  }
-
   .nav-button {
     color: white;
   }
 
   .menu-toggle {
     color: rgb(255, 255, 255);
+  }
+
+  /* Ocultamos los enlaces y sociales en la barra principal en móvil, pero los mostramos en el menú abierto */
+  .nav-main .nav-buttons, .nav-main .nav-socials {
+    display: flex;
+  }
+  .nav-left {
+    display: block;
   }
 }
 
@@ -191,6 +214,12 @@
 .contact-page {
   min-height: 100vh;
   padding-top: 70px; /* espacio para navbar */
+}
+/* Ajuste de padding para móviles */
+@media (max-width: 768px) {
+  .projects-page, .services-page, .education-page, .about-page, .contact-page, .home-page {
+    padding: 80px 1rem 1rem 1rem;
+  }
 }
 
 /* Sección contact con fondo */
