@@ -204,7 +204,7 @@ export const registerUser = async (userData) => {
   if (contentType && contentType.indexOf("application/json") !== -1) {
     return res.json();
   }
-  return null; // O un objeto vacío {} si no se espera contenido
+  return {}; // Devolver un objeto vacío para evitar errores de 'null'
 };
 
 export const loginUser = async (credentials) => {
@@ -226,7 +226,7 @@ export const loginUser = async (credentials) => {
   if (contentType && contentType.indexOf("application/json") !== -1) {
     return res.json();
   }
-  return null; // O un objeto vacío {} si no se espera contenido
+  return {}; // Devolver un objeto vacío para evitar errores de 'null'
 };
 
 export const getProfile = async () => {
