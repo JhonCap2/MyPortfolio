@@ -1,6 +1,6 @@
 
 
-const API_URL = "/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 // NOTE: By using a relative path like "/api", we are leveraging
 // the "proxy" configuration in the frontend's package.json.
