@@ -294,21 +294,19 @@ export const loginUser = async (credentials) => {
 };
 
 export const getProfile = async () => {
-  const res = await fetch("/api/auth/profile", {
-    headers: getHeaders(),
-  });
-  if (!res.ok) {
-    // Handle potential non-JSON error responses
-    try {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Invalid token or session expired");
-    } catch (e) {
-      throw new Error(res.statusText || "Invalid token or session expired");
+  try {
+    const res = await fetch("/api/auth/profile", {
+      headers: getHeaders(),
+    });
+
+    if (!res.ok) {
+      return {}; // Si hay un error (token inválido, etc.), devuelve un objeto vacío.
     }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch profile:", error);
+    return {}; // En caso de cualquier error de red o JSON, devuelve un objeto vacío.
   }
-  const contentType = res.headers.get("content-type");
-  if (contentType && contentType.indexOf("application/json") !== -1) {
-    return res.json();
-  }
-  return {}; // Devuelve un objeto vacío si no hay JSON
 };
