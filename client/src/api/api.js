@@ -250,14 +250,66 @@ export const deleteUser = async (id) => {
 // AUTHENTICATION
 // -------------------
 export const registerUser = async (userData) => {
-  const res = await fetch("/api/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-  if (!res.ok) {
-    // Handle potential non-JSON error responses
-    try {
+  try {
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      // Devuelve el mensaje de error del backend
+      return { error: data.message || "Registration failed" };
+    }
+
+    return data; // Devuelve los datos del usuario/token si es exitoso
+  } catch (error) {
+    console.error("Registration request failed:", error);
+    return { error: "An unexpected error occurred during registration." };
+  }
+};
+
+export const loginUser = async (credentials) => {
+  try {
+    const res = await fetch("/api/auth/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+
+    const data = await res.json(); // Intenta leer el JSON en cualquier caso
+
+    if (!res.ok) {
+      return { error: data.message || "Login failed" };
+    }
+
+    return data; // Devuelve { token: "..." } si es exitoso
+  } catch (error) {
+    console.error("Login request failed:", error);
+    return { error: "An unexpected error occurred during login." };
+  }
+};
+
+export const getProfile = async () => {
+  try {
+    const res = await fetch("/api/auth/profile", {
+      headers: getHeaders(),
+    });
+
+    if (!res.ok) {
+      return {}; // Si hay un error (token inválido, etc.), devuelve un objeto vacío.
+    }
+
+    // Intenta leer el JSON, si falla, el catch lo manejará
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch profile:", error);
+    return {}; // En caso de cualquier error de red o JSON, devuelve un objeto vacío.
+  }
+};
       const errorData = await res.json();
       throw new Error(errorData.message || "Registration failed");
     } catch (e) {
