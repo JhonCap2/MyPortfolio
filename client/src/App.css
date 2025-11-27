@@ -1,9 +1,9 @@
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 40px; /* Un tamaño más adecuado para la navbar */
+  padding: 0; /* Quitamos el padding que lo hacía demasiado grande */
   will-change: filter;
-  transition: filter 300ms;
+  transition: filter 300ms;  
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
