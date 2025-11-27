@@ -1,17 +1,47 @@
-import React from 'react';
-import Navbar from '../components/Navbar'; // Importa el Navbar
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import { getProjects } from '../api/api'; // 1. Importamos la función de la API
 
 const PrimerPortfolio = () => {
+  // 2. Creamos estados para guardar los proyectos, el estado de carga y los errores
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 3. Usamos useEffect para obtener los datos cuando el componente se monta
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const projectsData = await getProjects();
+        setProjects(projectsData);
+        setError(null);
+      } catch (err) {
+        setError('Error al cargar los proyectos.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []); // El array vacío asegura que se ejecute solo una vez
+
   return (
     <div>
-      <Navbar /> {/* Añade el Navbar aquí */}
-      
-      {/* El resto de tu contenido del portafolio va aquí */}
+      <Navbar />
       <main style={{ padding: '2rem' }}>
         <h1>Bienvenido a Mi Portafolio</h1>
-        <p>Este es el contenido principal de la página.</p>
-        <button className="btn btn-success">Agregar</button>
-        <button className="btn btn-danger" style={{ marginLeft: '10px' }}>Borrar</button>
+        <h2>Mis Proyectos</h2>
+        {loading && <p>Cargando proyectos...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {projects.length > 0 && (
+          <ul>
+            {projects.map((project) => (
+              <li key={project._id}>{project.title} - {project.description}</li>
+            ))}
+          </ul>
+        )}
       </main>
     </div>
   );
