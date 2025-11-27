@@ -31,7 +31,11 @@ export const addContact = async (contact) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const updateContact = async (id, contact) => {
@@ -43,7 +47,11 @@ export const updateContact = async (id, contact) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const deleteContact = async (id) => {
@@ -54,7 +62,11 @@ export const deleteContact = async (id) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 // -------------------
@@ -78,7 +90,11 @@ export const addProject = async (project) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const updateProject = async (id, project) => {
@@ -90,7 +106,11 @@ export const updateProject = async (id, project) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const deleteProject = async (id) => {
@@ -101,7 +121,11 @@ export const deleteProject = async (id) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 // -------------------
@@ -125,7 +149,11 @@ export const addEducation = async (education) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const updateEducation = async (id, education) => {
@@ -137,7 +165,11 @@ export const updateEducation = async (id, education) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const deleteEducation = async (id) => {
@@ -148,7 +180,11 @@ export const deleteEducation = async (id) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 // -------------------
@@ -172,7 +208,11 @@ export const addUser = async (user) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const updateUser = async (id, user) => {
@@ -184,7 +224,11 @@ export const updateUser = async (id, user) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 export const deleteUser = async (id) => {
@@ -195,7 +239,11 @@ export const deleteUser = async (id) => {
   if (res.status === 204) {
     return {};
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {};
 };
 
 // -------------------
