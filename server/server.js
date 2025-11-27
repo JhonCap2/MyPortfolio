@@ -43,11 +43,26 @@ app.use("/api/educations", educationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
-// -------------------
-// 🧠 Ruta de prueba
-// -------------------
-app.get("/", (req, res) => {
-  res.send("<h1>Portfolio Backend Running Successfully!</h1>");
+// --------------------------------
+// 💡 SERVIR FRONTEND EN PRODUCCIÓN
+// --------------------------------
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+if (process.env.NODE_ENV === "production") {
+  // Servir los archivos estáticos de la carpeta 'dist' del cliente
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+
+  // Para cualquier otra ruta que no sea de la API, servir el index.html del cliente
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("<h1>Portfolio Backend Running Successfully! (Development Mode)</h1>");
+  });
 });
 
 // -------------------
