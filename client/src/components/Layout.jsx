@@ -57,7 +57,9 @@ export default function Layout({ user, onSignOut }) {
       <div className="navbar-container">
         {/* Contenedor principal para logo y enlaces */}
         <div className={`nav-main ${menuOpen ? "open" : ""}`}>
-          <img src={Logo} alt="Logo JH" className="logo" />
+          <Link to="/" className="navbar-logo-link">
+            <img src={Logo} alt="Logo JH" className="logo" />
+          </Link>
           <div className="nav-left">
             <div className="nav-buttons">
               <button className="nav-button" onClick={() => scrollToSection("home")}><FaHome /> Home</button>
