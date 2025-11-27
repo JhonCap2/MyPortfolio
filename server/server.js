@@ -57,8 +57,10 @@ if (process.env.NODE_ENV === "production") {
 
   // Para cualquier otra ruta que no sea de la API, servir el index.html del cliente
   // Esto debe ir DESPUÉS de las rutas de la API pero ANTES del manejo de 404.
-  app.get(/^(?!\/api).*/, (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
+  // La expresión regular /^(?!\/api)/ le dice a Express: "atrapa cualquier ruta
+  // que NO comience con /api". Esta es la forma correcta y moderna.
+  app.get(/^(?!\/api)/, (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/pages", "PrimeraPortfolio.html"));
   });
 } else {
   app.get("/", (req, res) => {
