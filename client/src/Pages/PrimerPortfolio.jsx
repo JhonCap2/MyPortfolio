@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from '../components/Navbar';
 import { getProjects } from "../api/api"; // 1. Importamos la función de la API
+import './PrimerPortfolio.css'; // Importamos los nuevos estilos
 
 const PrimerPortfolio = () => {
   // 2. Creamos estados para guardar los proyectos, el estado de carga y los errores
@@ -28,20 +29,23 @@ const PrimerPortfolio = () => {
   }, []); // El array vacío asegura que se ejecute solo una vez
   
   return (
-    <div>
+    <div className="portfolio-container">
       <Navbar />
-      <main style={{ padding: '2rem' }}>
+      <main>
         <h1>Bienvenido a Mi Portafolio</h1>
         <h2>Mis Proyectos</h2>
-        {loading && <p>Cargando proyectos...</p>} {/* Muestra si está cargando */}
-        {error && <p style={{ color: "red" }}>{error}</p>} {/* Muestra si hay un error */}
-        {projects.length > 0 && (
-          <ul>
+        {loading && <p className="loading-message">Cargando proyectos...</p>}
+        {error && <p className="error-message">{error}</p>}
+        
+        <div className="projects-grid">
+          {projects.length > 0 &&
             {projects.map((project) => (
-              <li key={project._id}>{project.title} - {project.description}</li>
+              <div key={project._id} className="project-card">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+              </div>
             ))}
-          </ul>
-        )}
+        </div>
       </main>
     </div>
   );

@@ -52,13 +52,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 if (process.env.NODE_ENV === "production") {
-  // Servir los archivos estáticos de la carpeta 'dist' del cliente
-  app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  // Para cualquier otra ruta que no sea de la API, servir el index.html del cliente
-  // Esto debe ir DESPUÉS de las rutas de la API pero ANTES del manejo de 404.
-  // La expresión regular /^(?!\/api)/ le dice a Express: "atrapa cualquier ruta
-  // que NO comience con /api". Esta es la forma correcta y moderna.
+  app.use(express.static(path.join(__dirname, "../client/dist")));
   app.get(/^(?!\/api)/, (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/pages", "PrimeraPortfolio.html"));
   });
