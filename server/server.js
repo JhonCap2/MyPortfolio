@@ -56,7 +56,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
   // Para cualquier otra ruta que no sea de la API, servir el index.html del cliente
-  app.get("/*", (req, res) => {
+  // Esto debe ir DESPUÉS de las rutas de la API pero ANTES del manejo de 404.
+  app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
   });
 } else {
