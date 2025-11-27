@@ -15,7 +15,11 @@ const getHeaders = () => {
 // -------------------
 export const getContacts = async () => {
   const res = await fetch("/api/contacts", { headers: getHeaders() });
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return []; // Devuelve un array vacío si no hay JSON
 };
 
 export const addContact = async (contact) => {
@@ -58,7 +62,11 @@ export const deleteContact = async (id) => {
 // -------------------
 export const getProjects = async () => {
   const res = await fetch("/api/projects", { headers: getHeaders() });
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return []; // Devuelve un array vacío si no hay JSON
 };
 
 export const addProject = async (project) => {
@@ -101,7 +109,11 @@ export const deleteProject = async (id) => {
 // -------------------
 export const getEducations = async () => {
   const res = await fetch("/api/educations", { headers: getHeaders() });
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return []; // Devuelve un array vacío si no hay JSON
 };
 
 export const addEducation = async (education) => {
@@ -144,7 +156,11 @@ export const deleteEducation = async (id) => {
 // -------------------
 export const getUsers = async () => {
   const res = await fetch("/api/users", { headers: getHeaders() });
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (res.ok && contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return []; // Devuelve un array vacío si no hay JSON
 };
 
 export const addUser = async (user) => {
@@ -242,5 +258,9 @@ export const getProfile = async () => {
       throw new Error(res.statusText || "Invalid token or session expired");
     }
   }
-  return res.json();
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    return res.json();
+  }
+  return {}; // Devuelve un objeto vacío si no hay JSON
 };
