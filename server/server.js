@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.send("<h1>Portfolio Backend Running Successfully! (Development Mode)</h1>");
   });
-});
+}
 
 // -------------------
 // ❌ Manejo de rutas no encontradas
