@@ -5,8 +5,8 @@ import { authenticate, isAdmin } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-// GET todos los proyectos (todos los usuarios autenticados)
-router.get("/", authenticate, async (req, res) => {
+// GET todos los proyectos (público para que todos puedan verlos)
+router.get("/", async (req, res) => {
   try {
     const projects = await Project.find();
     res.json(projects);
