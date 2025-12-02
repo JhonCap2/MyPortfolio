@@ -77,6 +77,10 @@ export default function Home() {
           <h2>Technologies I Work With</h2>
           <div className="icons-grid">
             {techs.map((tech, idx) => {
+              // Añadimos una guarda: si el objeto tech no existe, no renderizamos nada.
+              // Esto previene el error si hay un elemento undefined en el array.
+              if (!tech) return null;
+
               const Icon = tech.icon;
               return (
                 <div key={idx} className="icon-box">
