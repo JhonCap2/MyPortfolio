@@ -5,7 +5,7 @@ import resumePDF from '../document/Jhon-Adames-Resume.pdf';
 
 const About = () => {
   return (
-    <div className="about-page">
+    <div className="about-page" style={{ backgroundColor: 'rgba(255, 255, 255, 0.97)', minHeight: '100vh' }}>
       <div className="about-container">
         <div className="about-card">
           <img src={profileImage} alt="Jhon Adames portrait" className="profile-image" />

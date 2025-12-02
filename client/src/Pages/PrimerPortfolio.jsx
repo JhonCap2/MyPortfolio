@@ -29,22 +29,26 @@ const PrimerPortfolio = () => {
   }, []); // El array vacío asegura que se ejecute solo una vez
   
   return (
-    <div className="portfolio-container">
+    // Añadimos un estilo en línea para forzar el fondo blanco.
+    // Para unificar todas las páginas, lo ideal es poner este estilo
+    // en un archivo CSS global (ej. index.css) dentro de la regla 'body'.
+    <div 
+      className="portfolio-container" 
+      style={{ backgroundColor: '#fff', minHeight: '100vh', padding: '20px' }}>
       <Navbar />
       <main>
-        <h1>Bienvenido a Mi Portafolio</h1>
+        <h1>Portafolio Dinámico</h1>
         <h2>Mis Proyectos</h2>
         {loading && <p className="loading-message">Cargando proyectos...</p>}
         {error && <p className="error-message">{error}</p>}
         
         <div className="projects-grid">
-          {projects.length > 0 &&
-            {projects.map((project) => (
-              <div key={project._id} className="project-card">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
-            ))}
+          {projects.map((project) => (
+            <div key={project._id} className="project-card">
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+            </div>
+          ))}
         </div>
       </main>
     </div>

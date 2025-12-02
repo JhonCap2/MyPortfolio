@@ -5,7 +5,7 @@
   min-height: 100vh;
   text-align: center;
   padding: 2rem;
-  color: #fff;
+  color: #2c3e50; /* Cambiado a color de texto oscuro */
 }
 
 /* Particles background wrapper */
@@ -53,7 +53,7 @@
 .mission-statement {
   margin: 1.5rem 0;
   font-style: italic;
-  color: #f1f1f1;
+  color: #555; /* Cambiado a color de texto oscuro */
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
@@ -91,13 +91,13 @@
 }
 
 .info-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: #ffffff; /* Fondo blanco sólido */
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 1.5rem;
   width: 280px;
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: #2c3e50; /* Texto oscuro */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra suave */
   opacity: 1;
 }
 
@@ -133,7 +133,7 @@
 }
 
 .link-card p {
-  color: #fff;
+  color: #2c3e50; /* Texto oscuro */
 }
 
 /* 📱 Responsivo */
@@ -202,19 +202,19 @@
 .icons-section h2 {
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
-  color: #fafafa;
+  color: #2c3e50; /* Texto oscuro */
 }
 
 .icons-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px; /* Aumentamos el espacio */
 }
 
 .icon-box {
-  background: #353535;
-  padding: 15px;
+  background: #f9f9f9; /* Fondo gris claro */
+  padding: 20px;
   border-radius: 12px;
   width: 120px;
   text-align: center;
@@ -236,7 +236,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(255,255,255,0.04);
+  background: #eef9ff; /* Fondo azulado muy claro */
 }
 
 .tech-icon {
@@ -253,4 +253,3 @@
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-

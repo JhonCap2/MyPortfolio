@@ -21,7 +21,7 @@ const educationList = [
 
 const Education = () => {
   return (
-    <div className="education-container">
+    <div className="education-container" style={{ backgroundColor: 'rgba(255, 255, 255, 0.97)', minHeight: '100vh', padding: '20px' }}>
       <h1>My Education</h1>
       <div className="education-list">
         {educationList.map((edu, index) => (

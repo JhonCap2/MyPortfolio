@@ -3,8 +3,8 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #4b4a4a; /* fondo gris oscuro general */
+  font-family: 'Segoe UI', sans-serif;  
+  /* background-color: #4b4a4a; */ /* Eliminamos el fondo oscuro global desde aquí */
   overflow-x: hidden;
   min-height: 100vh;
   box-sizing: border-box;
@@ -14,9 +14,9 @@ html, body {
 .services-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #424242; /* fondo de sección */
-  color: #fff;
-  padding: 40px 0;
+  background-color: #ffffff; /* Cambiado a fondo blanco */
+  color: #2c3e50; /* Cambiado a color de texto oscuro */
+  padding: 20px 0; /* Reducimos el padding superior */
   box-sizing: border-box;
   text-align: center;
 }
@@ -87,7 +87,7 @@ html, body {
 @media (max-width: 768px) {
   .service-card {
     flex-direction: column;
-    text-align: center;
+    text-align: left; /* Mantenemos el texto alineado a la izquierda */
     padding: 16px;
   }
 

@@ -4,7 +4,7 @@
   padding: 20px;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  background-color: #f5f5f5;
+  background-color: #ffffff; /* Fondo blanco */
 }
 
 .education-container h1 {
@@ -28,14 +28,13 @@
   gap: 10px;
   width: 80%;
   max-width: 900px;
-  background-color: rgba(255, 255, 255, 0.15); /* Fondo translúcido */
-  backdrop-filter: blur(10px); /* Efecto blur detrás del fondo */
+  background-color: #ffffff; /* Fondo blanco sólido */
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra suave */
   opacity: 1;
-  color: #000000;
-  text-align: left;
+  color: #2c3e50; /* Texto oscuro */
+  text-align: left; /* Aseguramos alineación a la izquierda */
 }
 
 .education-card:hover {
@@ -53,13 +52,13 @@
 /* Detalles de institución y año */
 .education-card p {
   margin: 5px 0;
-  color: #000000;
+  color: #2c3e50; /* Texto oscuro */
   font-size: 0.95rem;
   line-height: 1.4;
 }
 
 .education-card p strong {
-  color: #f1c40f;
+  color: #007BFF; /* Color azul para resaltar */
 }
 
 /* 📱 Responsivo */

@@ -28,7 +28,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="contact-container">
+    <div className="contact-container" style={{ backgroundColor: 'rgba(255, 255, 255, 0.97)', minHeight: '100vh' }}>
       <h1>Contact Me</h1>
 
       {/* Contenedor que agrupa panel + formulario */}

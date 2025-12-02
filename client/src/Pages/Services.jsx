@@ -24,7 +24,7 @@ const servicesList = [
 
 const Services = () => {
   return (
-    <div className="services-page">
+    <div className="services-page" style={{ backgroundColor: 'rgba(255, 255, 255, 0.97)', minHeight: '100vh' }}>
       <div className="services-container">
         <h1>My Services</h1>
         <div className="services-grid">
