@@ -1,9 +1,9 @@
 /* PrimerPortfolio.css */
 
 .portfolio-container {
-  padding: 2rem;
-  background-color: #f4f7f6; /* Un fondo gris claro para la página */
-  min-height: calc(100vh - 60px); /* Ajustar altura menos la navbar */
+  padding: 20px; /* 20px de padding como se definió en el estilo en línea */
+  background-color: #fff; /* Fondo blanco */
+  min-height: 100vh; /* Altura mínima de toda la pantalla */
   text-align: center;
 }
 

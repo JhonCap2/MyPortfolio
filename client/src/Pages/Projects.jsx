@@ -27,7 +27,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <div className="projects-page" style={{ backgroundColor: 'rgba(255, 255, 255, 0.97)', minHeight: '100vh' }}>
+    <div className="projects-page page-container">
       <div className="projects-container">
         <h1>My Projects</h1>
         <div className="projects-grid">

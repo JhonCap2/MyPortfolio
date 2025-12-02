@@ -3,6 +3,26 @@ import Navbar from '../components/Navbar';
 import { getProjects } from "../api/api"; // 1. Importamos la función de la API
 import './PrimerPortfolio.css'; // Importamos los nuevos estilos
 
+// Componente para renderizar la lista de proyectos o los mensajes de estado
+const ProjectList = ({ loading, error, projects }) => {
+  if (loading) {
+    return <p className="loading-message">Cargando proyectos...</p>;
+  }
+  if (error) {
+    return <p className="error-message">{error}</p>;
+  }
+  return (
+    <div className="projects-grid">
+      {projects.map((project) => (
+        <div key={project._id} className="project-card">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const PrimerPortfolio = () => {
   // 2. Creamos estados para guardar los proyectos, el estado de carga y los errores
   const [projects, setProjects] = useState([]);
@@ -32,24 +52,12 @@ const PrimerPortfolio = () => {
     // Añadimos un estilo en línea para forzar el fondo blanco.
     // Para unificar todas las páginas, lo ideal es poner este estilo
     // en un archivo CSS global (ej. index.css) dentro de la regla 'body'.
-    <div 
-      className="portfolio-container" 
-      style={{ backgroundColor: '#fff', minHeight: '100vh', padding: '20px' }}>
+    <div className="portfolio-container">
       <Navbar />
       <main>
         <h1>Portafolio Dinámico</h1>
         <h2>Mis Proyectos</h2>
-        {loading && <p className="loading-message">Cargando proyectos...</p>}
-        {error && <p className="error-message">{error}</p>}
-        
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <div key={project._id} className="project-card">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-            </div>
-          ))}
-        </div>
+        <ProjectList loading={loading} error={error} projects={projects} />
       </main>
     </div>
   );
