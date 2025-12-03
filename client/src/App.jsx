@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { AuthProvider, useAuth } from "./AuthContext"; // Corregimos la ruta de importación
 
 // --- Componentes de página y autenticación ---
-import Login from "./pages/Login";
+import Login from "./Pages/Login";
 import Register from "./components/Register";
 import ProjectsList from "./components/ProjectsList";
 import Layout from "./components/Layout"; // Importamos el Layout del portafolio
