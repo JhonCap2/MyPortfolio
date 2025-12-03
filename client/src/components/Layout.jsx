@@ -5,6 +5,7 @@ import {
   FaBook, FaPhone, FaGithub, FaLinkedin
 } from "react-icons/fa";
 import Logo from "../imagen/jhlogo.png";
+import { useAuth } from "../AuthContext";
 
 // Páginas
 import Home from "../Pages/Home";
@@ -16,7 +17,8 @@ import About from "../Pages/About";
 
 import "./Layout.css";
 
-export default function Layout({ user, onSignOut }) {
+export default function Layout() {
+  const { user, handleSignOut } = useAuth(); // Obtenemos el estado del contexto
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
 
@@ -69,13 +71,18 @@ export default function Layout({ user, onSignOut }) {
               <button className="nav-button" onClick={() => scrollToSection("about")}><FaUser /> About</button>
               <button className="nav-button" onClick={() => scrollToSection("contact")}><FaPhone /> Contact</button>
               {user ? (
-                <button onClick={onSignOut} className="nav-button login-button">
-                  Cerrar Sesión
+                <button onClick={handleSignOut} className="nav-button login-button">
+                  Sign Out
                 </button>
               ) : (
-                <Link to="/login" className="nav-button login-button">
-                  Login
-                </Link>
+                <>
+                  <Link to="/login" className="nav-button login-button">
+                    Login
+                  </Link>
+                  <Link to="/register" className="nav-button login-button">
+                    Register
+                  </Link>
+                </>
               )}
             </div>
             <div className="nav-socials">

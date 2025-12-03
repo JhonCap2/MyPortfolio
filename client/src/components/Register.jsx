@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../api/api";
 import "./Login.css"; // Reutiliza el mismo CSS
-
+ 
 export default function Register({ onRegister }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ export default function Register({ onRegister }) {
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Estado para la carga
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -22,8 +22,8 @@ export default function Register({ onRegister }) {
       return;
     }
 
-    setIsLoading(true); // Inicia la carga
-    setMessage(""); // Limpia mensajes anteriores
+    setIsLoading(true); // Start loading
+    setMessage(""); // Clear previous messages
 
     try {
       const data = await registerUser({
@@ -31,25 +31,25 @@ export default function Register({ onRegister }) {
         email: email.trim(),
         password: password.trim(),
       });
-      // El backend debería devolver el token y el usuario al registrarse
+      // The backend should return the token and user upon registration
       localStorage.setItem("token", data.token);
-      onRegister(data.user); // data.user debe incluir el rol asignado por el backend
-      navigate("/dashboard"); // Correcto: Redirigir al dashboard
+      onRegister(data.user); // data.user should include the role assigned by the backend
+      navigate("/dashboard"); // Correct: Redirect to dashboard
     } catch (err) {
       setMessage(err.message || "Server connection error");
       console.error(err);
     } finally {
-      setIsLoading(false); // Finaliza la carga
+      setIsLoading(false); // End loading
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Crear Cuenta</h2>
+        <h2>Create Account</h2>
         <form onSubmit={handleRegister}>
           <div className="input-group">
-            <label htmlFor="name">Nombre Completo</label>
+            <label htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
@@ -69,7 +69,7 @@ export default function Register({ onRegister }) {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Contraseña</label>
+            <label htmlFor="password">Password</label>
             <div className="password-wrapper">
               <input type={showPassword ? "text" : "password"} id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
@@ -86,7 +86,7 @@ export default function Register({ onRegister }) {
             </div>
           </div>
           <div className="input-group">
-            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <div className="password-wrapper">
               <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
               <button type="button" className="password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
@@ -105,16 +105,16 @@ export default function Register({ onRegister }) {
             </div>
           </div>
           <button type="submit" className="btn btn-primary" disabled={isLoading}>
-            {isLoading ? "Registrando..." : "Registrar"}
+            {isLoading ? "Registering..." : "Register"}
           </button>
           {message && <p className="login-message">{message}</p>}
         </form>
         <p className="register-text">
-          ¿Ya tienes una cuenta?{" "}
-          <span onClick={() => navigate("/login")}>Inicia sesión</span>
+          Already have an account?{" "}
+          <span onClick={() => navigate("/login")}>Sign in</span>
         </p>
         <Link to="/" className="btn btn-secondary btn-back">
-          Volver al Portafolio
+          Back to Portfolio
         </Link>
       </div>
     </div>

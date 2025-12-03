@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import {
   getProjects, addProject, updateProject, deleteProject,
   getContacts, addContact, updateContact, deleteContact,
@@ -31,9 +32,9 @@ const config = {
   }
 };
 
-const ProjectsList = ({ user, onSignOut }) => {
+const ProjectsList = () => {
+  const { user, handleSignOut } = useAuth(); // Obtenemos el usuario y la función del contexto
   const isAdmin = user && user.role === 'admin';
-  
   const [currentType, setCurrentType] = useState("projects");
   const [items, setItems] = useState([]);
   const [formData, setFormData] = useState({});
@@ -77,6 +78,24 @@ const ProjectsList = ({ user, onSignOut }) => {
   };
 
   const handleSubmit = async () => {
+    // --- VALIDATION LOGIC ---
+    const requiredFields = currentConfig.fields.filter(field => {
+      const fieldName = typeof field === 'string' ? field : field.name;
+      // 'description' is optional
+      if (fieldName === 'description') return false;
+      // 'password' is only required when creating a new user
+      if (fieldName === 'password' && editingId) return false;
+      return true;
+    });
+
+    for (const field of requiredFields) {
+      const fieldName = typeof field === 'string' ? field : field.name;
+      if (!formData[fieldName] || formData[fieldName].trim() === '') {
+        showMessage(`Field "${fieldName}" is required.`, 'error');
+        return; // Stop submission if a required field is empty
+      }
+    }
+
     const { add, update } = currentConfig.api;
     try {
       editingId ? await update(editingId, formData) : await add(formData);
@@ -194,12 +213,20 @@ const ProjectsList = ({ user, onSignOut }) => {
     <div className="dashboard-container">
       <div className="dashboard-header">
         <div className="user-info">
-          <h2>Dashboard</h2>
-          <p>Welcome, <strong>{user.name}</strong>! Your role is: <strong>{user.role}</strong></p>
+          <h2>My Portfolio</h2>
+          {user ? (
+            <p>Welcome, <strong>{user.name}</strong>! Your role is: <strong>{user.role}</strong></p>
+          ) : (
+            <p>Welcome, Guest. Please sign in to manage content.</p>
+          )}
         </div>
         <div className="header-actions">
-          {onSignOut && (
-            <button onClick={onSignOut} className="button delete">Sign Out</button>
+          {user ? (
+            <button onClick={handleSignOut} className="button delete">Sign Out</button>
+          ) : (
+            <Link to="/login" className="button">
+              Iniciar Sesión
+            </Link>
           )}
         </div>
       </div>

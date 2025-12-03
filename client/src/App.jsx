@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; // Necesitarás instalar esto: npm install jwt-decode
+import { AuthProvider, useAuth } from "./AuthContext"; // Corregimos la ruta de importación
 
-// Componentes de página y autenticación
-import Login from "./components/Login";
+// --- Componentes de página y autenticación ---
+import Login from "./pages/Login";
 import Register from "./components/Register";
-import Layout from "./components/Layout";
 import ProjectsList from "./components/ProjectsList";
-import Profile from "./components/Profile"; // Importamos el componente Profile
+import Layout from "./components/Layout"; // Importamos el Layout del portafolio
+import Profile from "./components/Profile";
 
 // Componentes de ruta protegida
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,43 +15,21 @@ import AdminRoute from "./components/AdminRoute";
 // Estilos globales
 import "./App.css";
 
-function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+// --- Componente Wrapper para la lógica de enrutamiento ---
+// Esto nos permite usar el hook `useNavigate` fuera del contexto del Router principal
+const AppWrapper = () => {
+  return (
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
+  );
+};
 
-  // Efecto para verificar la sesión del usuario al cargar la app
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decodedUser = jwtDecode(token);
-        // Comprueba si el token ha expirado
-        if (decodedUser.exp * 1000 > Date.now()) {
-          setUser(decodedUser);
-        } else {
-          // Si el token expiró, lo limpiamos
-          localStorage.removeItem("token");
-        }
-      } catch (error) {
-        console.error("Invalid token:", error);
-        localStorage.removeItem("token");
-      }
-    }
-    setLoading(false); // Finaliza la carga inicial
-  }, []);
-
-  const handleLogin = (loggedInUser) => {
-    setUser(loggedInUser);
-  };
-
-  const handleRegister = (registeredUser) => {
-    setUser(registeredUser);
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-  };
+// --- Componente que define las rutas de la aplicación ---
+const AppRoutes = () => {
+  const { user, loading, handleLogin, handleRegister } = useAuth();
 
   // Muestra un spinner mientras se verifica el token
   if (loading) {
@@ -60,30 +37,27 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        {/* Rutas públicas */}
-        <Route path="/" element={<Layout user={user} onSignOut={handleSignOut} />} />
-        <Route path="/login" element={!user ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
-        <Route path="/register" element={!user ? <Register onRegister={handleRegister} /> : <Navigate to="/dashboard" />} />
+    <Routes>
+      {/* --- Ruta Principal (Tu Portafolio - "primerporfolio") --- */}
+      <Route path="/" element={<Layout />} />
 
-        {/* Rutas Protegidas (solo para usuarios logueados) */}
-        <Route element={<ProtectedRoute user={user} />}>
-          <Route path="/dashboard" element={<ProjectsList user={user} onSignOut={handleSignOut} />} />
-          <Route path="/profile" element={<Profile user={user} />} />
-          
-          {/* Rutas de Administrador (solo para rol 'admin') */}
-          <Route element={<AdminRoute user={user} />}>
-            {/* Aquí puedes añadir rutas que solo los admins pueden ver */}
-          </Route>
+      {/* --- Rutas Públicas de Autenticación --- */}
+      <Route path="/login" element={!user ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+      <Route path="/register" element={!user ? <Register onRegister={handleRegister} /> : <Navigate to="/dashboard" />} />
+
+      {/* --- Rutas Protegidas (solo para usuarios autenticados) --- */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<ProjectsList />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route element={<AdminRoute />}>
+          {/* Aquí puedes añadir rutas que solo los admins pueden ver */}
         </Route>
+      </Route>
 
-        {/* Redirección para rutas no encontradas */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
+      {/* Redirección para rutas no encontradas: lleva a la página principal. */}
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
-}
+};
 
-export default App;
-
+export default AppWrapper;

@@ -6,7 +6,7 @@ import './PrimerPortfolio.css'; // Importamos los nuevos estilos
 // Componente para renderizar la lista de proyectos o los mensajes de estado
 const ProjectList = ({ loading, error, projects }) => {
   if (loading) {
-    return <p className="loading-message">Cargando proyectos...</p>;
+    return <p className="loading-message">Loading projects...</p>;
   }
   if (error) {
     return <p className="error-message">{error}</p>;
@@ -38,7 +38,8 @@ const PrimerPortfolio = () => {
         setProjects(projectsData); // Guardamos los proyectos en el estado
         setError(null); // Limpiamos cualquier error anterior
       } catch (err) {
-        setError("Error al cargar los proyectos.");
+        // Hacemos el manejo de errores más específico
+        setError("Could not load projects. Please try again later.");
         console.error(err);
       } finally {
         setLoading(false); // Dejamos de cargar, ya sea con éxito o con error
@@ -55,8 +56,8 @@ const PrimerPortfolio = () => {
     <div className="portfolio-container">
       <Navbar />
       <main>
-        <h1>Portafolio Dinámico</h1>
-        <h2>Mis Proyectos</h2>
+        <h1>Dynamic Portfolio</h1>
+        <h2>My Projects</h2>
         <ProjectList loading={loading} error={error} projects={projects} />
       </main>
     </div>

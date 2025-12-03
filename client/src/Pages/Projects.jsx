@@ -1,25 +1,26 @@
 import React from 'react';
 import './Projects.css';
-import project1Image from '../imagen/pokeapp.png';
-import project2Image from '../imagen/MovieWeb.jpg';
-import project3Image from '../imagen/Montemoriah.png';
+// Importamos las imágenes de los proyectos
+import pokeappImage from '../imagen/pokeapp.png';
+import movieWebImage from '../imagen/MovieWeb.jpg';
+import montemoriahImage from '../imagen/Montemoriah.png';
 
 const projects = [
   {
     title: 'Pokedex Web',
-    image: project1Image,
+    image: pokeappImage,
     role: 'Web Designer And API Rest.',
     outcome: 'An application that fulfilled its purpose: displaying all the Pokémon, along with their general information and image.'
   },
   {
     title: 'Web Movie',
-    image: project2Image,
+    image: movieWebImage,
     role: 'Full Project Creator',
     outcome: 'Improved user interaction by providing a dynamic space to explore movies and share opinions.'
   },
   {
     title: 'Montemoria Church Portal',
-    image: project3Image,
+    image: montemoriahImage,
     role: 'Database Designer',
     outcome: 'Successfully launched, enabling efficient member registration and streamlined access to church information for the community.'
   }

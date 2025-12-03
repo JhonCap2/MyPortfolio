@@ -13,18 +13,41 @@ export default function Contact() {
     message: "",
   });
 
+  // Estados para manejar el proceso de envío
+  const [isSending, setIsSending] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+
   // Maneja los cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Maneja el envío del formulario
-  const handleSubmit = (e) => {
+  // Simula el envío a una API
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Datos enviados:", formData);
-    alert("Gracias por tu mensaje. Serás redirigido al inicio.");
-    navigate("/"); // Redirige al Home
+    setIsSending(true);
+    setStatusMessage("Sending message...");
+
+    try {
+      // Aquí iría la llamada real a tu API, por ahora la simulamos
+      // await api.sendMessage(formData);
+      
+      // Simulación de éxito después de 2 segundos
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setStatusMessage("Thank you for your message! You will be redirected to the homepage.");
+      
+      // Espera un poco para que el usuario lea el mensaje y luego redirige
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
+
+    } catch (error) {
+      setStatusMessage("There was an error sending your message. Please try again.");
+      setIsSending(false); // Permite al usuario intentar de nuevo
+      console.error("Error al enviar:", error);
+    }
   };
 
   return (
@@ -81,7 +104,11 @@ export default function Contact() {
             onChange={handleChange}
             required
           ></textarea>
-          <button type="submit">Send Message</button>
+          <button type="submit" disabled={isSending}>
+            {isSending ? "Sending..." : "Send Message"}
+          </button>
+          {/* Muestra el mensaje de estado */}
+          {statusMessage && <p className="status-message">{statusMessage}</p>}
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import profilePic from "../imagen/jhon.png";
+import profileImage from "../imagen/jhon.png"; // Importamos la imagen
 import ParticlesBackground from "../components/ParticlesBackground";
 
 // Icons
@@ -30,8 +30,8 @@ export default function Home() {
         <h1>Welcome, I'm Jhon Adames</h1>
 
         <img
-          src={profilePic}
-          alt="Profile of Jhon Adames"
+          src={profileImage}
+          alt="Jhon Adames"
           className="profile-img"
         />
 
